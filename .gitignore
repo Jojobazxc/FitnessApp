@@ -1,0 +1,92 @@
+# Built files
+*.apk
+*.aar
+*.ap_
+*.aab
+
+# Gradle files
+.gradle/
+.idea/
+build/
+captures/
+*.iml
+*.log
+*.keystore
+
+# Local configuration files (sdk path, etc)
+local.properties
+
+# Logs
+
+# Android Studio Navigation editor temp files
+.navigation/
+
+# Android Studio captures folder
+
+# IntelliJ IDEA files
+*.ipr
+*.iws
+*.ids
+*.orig
+
+# Keystore files
+*.jks
+
+# External native build folder
+.externalNativeBuild/
+
+# NDK
+obj/
+
+# Generated files
+bin/
+gen/
+out/
+
+# Kotlin
+*.kotlin_module
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Jetpack Compose (если используются превью-аннотации)
+**/build/generated/
+
+# Файлы, специфичные для Gradle
+.gradle
+**/gradle/
+**/gradlew
+**/gradlew.bat
+
+# Файлы, специфичные для Android Studio
+
+# Файлы, специфичные для Kotlin
+**/*.kotlin_module
+**/*.kapt
+
+# Файлы, специфичные для KSP (Kotlin Symbol Processing)
+**/build/generated/ksp/
+
+# Файлы, специфичные для Compose
+**/build/generated/compose/
+
+# Файлы, специфичные для тестов
+**/build/reports/
+**/build/test-results/
+
+# Файлы, специфичные для линтинга
+**/build/lint/
+**/build/outputs/lint-results/
+
+# Файлы, специфичные для сборки
+**/build/outputs/apk/
+**/build/outputs/bundle/
+**/build/outputs/logs/
+**/build/outputs/mapping/
+**/build/outputs/native-debug-symbols/
+**/build/outputs/reports/
+**/build/outputs/test-results/
+**/build/tmp/
