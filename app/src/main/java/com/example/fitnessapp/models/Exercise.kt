@@ -6,7 +6,7 @@ import org.mongodb.kbson.ObjectId
 
 class Exercise: RealmObject {
     @PrimaryKey var _id: ObjectId = ObjectId()
-    val name: String = ""
-    val avatarPath = ""
-    val exerciseDetails: ExerciseDetails? = null
+    var name: String = ""
+    var avatarPath = ""
+    var exerciseDetails: ExerciseDetails? = null
 }
