@@ -1,5 +1,6 @@
 package com.example.fitnessapp.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fitnessapp.models.Category
@@ -21,10 +22,11 @@ class RealmViewModel: ViewModel() {
     val categories = realm.query<Category>().find().toList()
 
     init {
-        putDefaultData()
+        Log.d("Realm", "Начальные данные успешно загружены")
     }
 
-    private fun putDefaultData() {
+    //Раскомментить функцию в случае, если нужно загрузить начальные данные
+    /*private fun putDefaultData() {
         viewModelScope.launch {
             realm.write {
                 val firstUser = User().apply {
@@ -80,7 +82,9 @@ class RealmViewModel: ViewModel() {
                 copyToRealm(firstUser, updatePolicy = UpdatePolicy.ALL)
                 copyToRealm(category, updatePolicy = UpdatePolicy.ALL)
 
+                Log.d("Realm", "Функция с загрузкой успешно отработала")
+
             }
         }
-    }
+    }*/
 }

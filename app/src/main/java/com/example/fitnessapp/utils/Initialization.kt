@@ -9,7 +9,7 @@ import com.example.fitnessapp.models.UserDetails
 import io.realm.kotlin.Realm
 import io.realm.kotlin.RealmConfiguration
 
-class Initialization: Application() {
+class Initialization : Application() {
     companion object {
         lateinit var realm: Realm
     }
