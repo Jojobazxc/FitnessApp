@@ -1,6 +1,8 @@
 package com.example.fitnessapp.utils
 
 import android.app.Application
+import android.util.Log
+import androidx.compose.ui.platform.LocalContext
 import com.example.fitnessapp.models.Category
 import com.example.fitnessapp.models.Exercise
 import com.example.fitnessapp.models.ExerciseDetails
@@ -27,5 +29,7 @@ class Initialization : Application() {
                 )
             )
         )
+
     }
+
 }

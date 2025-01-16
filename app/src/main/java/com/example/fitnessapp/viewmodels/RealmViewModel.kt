@@ -9,6 +9,8 @@ import com.example.fitnessapp.models.ExerciseDetails
 import com.example.fitnessapp.models.User
 import com.example.fitnessapp.models.UserDetails
 import com.example.fitnessapp.utils.Initialization
+import io.realm.kotlin.Realm
+import io.realm.kotlin.RealmConfiguration
 import io.realm.kotlin.UpdatePolicy
 import io.realm.kotlin.ext.query
 import io.realm.kotlin.ext.realmListOf
@@ -20,6 +22,19 @@ class RealmViewModel: ViewModel() {
     private val realm = Initialization.realm
 
     val categories = realm.query<Category>().find().toList()
+
+    fun getUserById(objectId: ObjectId): User {
+        val user = realm.query<User>("_id == $0", objectId).find().first()
+        return user
+    }
+
+    fun deleteAllUsers() {
+
+        realm.writeBlocking {
+            delete(User::class) // Удаляем все объекты типа User
+        }
+
+    }
 
     init {
         Log.d("Realm", "Начальные данные успешно загружены")
