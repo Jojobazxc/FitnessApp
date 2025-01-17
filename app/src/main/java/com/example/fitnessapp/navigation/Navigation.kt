@@ -65,7 +65,7 @@ fun Navigation(realmViewModel: RealmViewModel, authViewModel: AuthViewModel) {
         composable(
             route = Screen.ProfileScreen.route
         ) {
-            ProfileScreen(navController = navController)
+            ProfileScreen(navController = navController, realmViewModel = realmViewModel)
         }
         composable(
             route = Screen.ExercisesScreen.route + "/{name}",

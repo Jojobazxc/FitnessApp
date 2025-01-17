@@ -8,6 +8,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -385,9 +386,53 @@ private fun loadImageFromAssets(context: Context, imagePath: String): Bitmap? {
     }
 }
 
+@Composable
+fun OutputTextFieldForProfile(
+    title: String,
+    placeHolder: String
+) {
+    Column (
+        modifier = Modifier
+            .fillMaxWidth()
+    ) {
+        Text(
+            text = title,
+            fontFamily = mainFontFamily,
+            fontWeight = FontWeight.Normal,
+            fontSize = 14.sp,
+            color = FirstTextColor,
+            modifier = Modifier
+                .padding(bottom = 8.dp)
+        )
+        OutlinedTextField(
+            value = "",
+            onValueChange = {},
+            colors = OutlinedTextFieldDefaults.colors(
+                unfocusedContainerColor = Color.White,
+                unfocusedBorderColor = Color.White,
+                disabledTextColor = ButtonsColor,
+                disabledBorderColor = Color.White,
+                disabledContainerColor = Color.White
+            ),
+            placeholder = {
+                Text(
+                    text = placeHolder,
+                    fontFamily = mainFontFamily,
+                    fontWeight = FontWeight.Normal,
+                    color = ButtonsColor,
+                    fontSize = 14.sp
+                )
+            },
+            shape = RoundedCornerShape(12.dp),
+            enabled = false
+        )
+
+    }
+}
+
 
 @Preview
 @Composable
 private fun UtilsPrev() {
-
+    OutputTextFieldForProfile("ВАШ ПОЛ:", "Мужской")
 }
