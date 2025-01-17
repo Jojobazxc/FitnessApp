@@ -23,6 +23,14 @@ class RealmViewModel : ViewModel() {
         putDefaultData()
     }
 
+    fun getMe(objectId: ObjectId): User {
+        var me = User()
+        viewModelScope.launch {
+            me = realm.query<User>("_id == $0", objectId).first().find()!!
+        }
+        return me
+    }
+
     fun getCategories(): List<Category> {
         var categories: List<Category> = listOf()
         viewModelScope.launch {
