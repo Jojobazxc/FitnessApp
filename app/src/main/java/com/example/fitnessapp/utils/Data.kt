@@ -19,7 +19,7 @@ fun getListOfItems(): List<BottomNavItems> {
             title = "Упражнения",
             selectedIcon = ImageVector.vectorResource(R.drawable.ic_exercise),
             unselectedIcon = ImageVector.vectorResource(R.drawable.ic_exercise),
-            route = Screen.MainScreen.route
+            route = Screen.CategoryScreen.route
         ),
         BottomNavItems(
             title = "Профиль",

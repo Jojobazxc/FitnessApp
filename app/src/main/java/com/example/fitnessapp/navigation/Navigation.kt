@@ -7,15 +7,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.fitnessapp.screens.LoginScreen
-import com.example.fitnessapp.screens.MainScreen
+import com.example.fitnessapp.screens.CategoryScreen
+import com.example.fitnessapp.screens.ExerciseDetailsScreen
+import com.example.fitnessapp.screens.ExercisesScreen
 import com.example.fitnessapp.screens.ProfileScreen
 import com.example.fitnessapp.screens.RegisterScreen
 import com.example.fitnessapp.screens.StartScreen
-import com.example.fitnessapp.utils.SharedPreferencesManager
 import com.example.fitnessapp.viewmodels.AuthViewModel
 import com.example.fitnessapp.viewmodels.RealmViewModel
 
@@ -31,7 +34,7 @@ fun Navigation(realmViewModel: RealmViewModel, authViewModel: AuthViewModel) {
 
     LaunchedEffect(Unit) {
         val isLoggedIn = authViewModel.isUserLoggedIn(context)
-        startDestination = if (isLoggedIn == true) Screen.MainScreen.route else Screen.RegisterScreen.route
+        startDestination = if (isLoggedIn == true) Screen.CategoryScreen.route else Screen.RegisterScreen.route
     }
 
 
@@ -45,9 +48,9 @@ fun Navigation(realmViewModel: RealmViewModel, authViewModel: AuthViewModel) {
             LoginScreen(authViewModel = authViewModel, navController = navController)
         }
         composable(
-            route = Screen.MainScreen.route
+            route = Screen.CategoryScreen.route
         ) {
-            MainScreen(/*realmViewModel = realmViewModel,*/ navController = navController)
+            CategoryScreen(realmViewModel = realmViewModel, navController = navController)
         }
         composable(
             route = Screen.RegisterScreen.route
@@ -63,6 +66,29 @@ fun Navigation(realmViewModel: RealmViewModel, authViewModel: AuthViewModel) {
             route = Screen.ProfileScreen.route
         ) {
             ProfileScreen(navController = navController)
+        }
+        composable(
+            route = Screen.ExercisesScreen.route + "/{name}",
+            arguments = listOf(
+                navArgument("name") {
+                    type = NavType.StringType
+                }
+            )
+        ) { navBackStackEntry ->
+            val name = navBackStackEntry.arguments?.getString("name") ?: ""
+            ExercisesScreen(navController = navController, name = name, realmViewModel = realmViewModel )
+        }
+        composable(
+            route = Screen.ExerciseDetailsScreen.route + "/{name}",
+            arguments = listOf(
+                navArgument("name") {
+                    type = NavType.StringType
+                }
+            )
+        ) { navBackStackEntry ->
+            val name = navBackStackEntry.arguments?.getString("name") ?: ""
+            ExerciseDetailsScreen(navController = navController, name = name, realmViewModel = realmViewModel)
+
         }
     }
 }

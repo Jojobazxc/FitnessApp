@@ -18,6 +18,7 @@ class Initialization : Application() {
 
     override fun onCreate() {
         super.onCreate()
+//        deleteRealmFile()
         realm = Realm.open(
             configuration = RealmConfiguration.create(
                 schema = setOf(
@@ -30,6 +31,20 @@ class Initialization : Application() {
             )
         )
 
+    }
+    private fun deleteRealmFile() {
+        val config = RealmConfiguration.Builder(
+            schema = setOf(
+                Category::class,
+                Exercise::class,
+                ExerciseDetails::class,
+                User::class,
+                UserDetails::class
+            )
+        ).deleteRealmIfMigrationNeeded().build()
+
+        Realm.deleteRealm(config)
+        Log.d("Realm", "Realm file deleted")
     }
 
 }
