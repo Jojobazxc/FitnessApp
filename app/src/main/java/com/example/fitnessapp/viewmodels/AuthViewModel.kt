@@ -13,11 +13,10 @@ import io.realm.kotlin.ext.query
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import org.mongodb.kbson.BsonObjectId
 import org.mongodb.kbson.ObjectId
 
 
-class AuthViewModel(private val context: Context) : ViewModel() {
+class AuthViewModel() : ViewModel() {
 
     private val realm = Initialization.realm
 
@@ -31,7 +30,8 @@ class AuthViewModel(private val context: Context) : ViewModel() {
         gender: Int,
         height: Int,
         weight: Int,
-        age: Int
+        age: Int,
+        context: Context
     ) {
         viewModelScope.launch {
             _authState.value = AuthState.Loading
@@ -43,7 +43,7 @@ class AuthViewModel(private val context: Context) : ViewModel() {
                     return@launch
                 }
                 realm.write {
-                    val newUser = User().apply {
+                    val user = User().apply {
                         _id = ObjectId()
                         this.email = email
                         this.password = password
@@ -55,7 +55,8 @@ class AuthViewModel(private val context: Context) : ViewModel() {
                             this.gender = gender
                         }
                     }
-                    copyToRealm(newUser)
+                    copyToRealm(user)
+                    saveAuthForCurrentUser(user = user, context = context)
                 }
                 _authState.value = AuthState.Success("Регистрация прошла успешно")
             } catch (e: Exception) {
@@ -64,7 +65,7 @@ class AuthViewModel(private val context: Context) : ViewModel() {
         }
     }
 
-    fun login(email: String, password: String) {
+    fun login(email: String, password: String, context: Context) {
         viewModelScope.launch {
             _authState.value = AuthState.Loading
             try {
@@ -73,7 +74,7 @@ class AuthViewModel(private val context: Context) : ViewModel() {
                         .find()
 
                 if (user != null) {
-                    saveAuthForCurrentUser(user = user)
+                    saveAuthForCurrentUser(user = user, context = context)
                     _authState.value = AuthState.Success("Авторизация успешна")
                 } else {
                     _authState.value = AuthState.Error("Ошибка авторизации")
@@ -84,7 +85,7 @@ class AuthViewModel(private val context: Context) : ViewModel() {
         }
     }
 
-    private fun saveAuthForCurrentUser(user: User) {
+    private fun saveAuthForCurrentUser(user: User, context: Context) {
         SharedPreferencesManager.init(context = context)
         viewModelScope.launch {
             realm.write {
@@ -105,7 +106,7 @@ class AuthViewModel(private val context: Context) : ViewModel() {
         return realm.query<User>("email == $0", email).first().find()?._id
     }
 
-    fun isUserLoggedIn(): Boolean? {
+    fun isUserLoggedIn(context: Context): Boolean? {
         SharedPreferencesManager.init(context = context)
         val objectId = SharedPreferencesManager.getObjectId()
         val user = realm.query<User>("_id == $0", objectId).first().find()
