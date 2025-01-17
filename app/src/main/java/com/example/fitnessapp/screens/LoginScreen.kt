@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.fitnessapp.navigation.Screen
 import com.example.fitnessapp.utils.AuthState
-import com.example.fitnessapp.utils.SharedPreferencesManager
 import com.example.fitnessapp.viewmodels.AuthViewModel
 
 @Composable
@@ -36,7 +35,7 @@ fun LoginScreen(authViewModel: AuthViewModel, navController: NavController) {
 //    Log.d("SP", "Object delete")
     LaunchedEffect(authState.value) {
         if (authState.value is AuthState.Success) {
-            navController.navigate(Screen.MainScreen.route) {
+            navController.navigate(Screen.CategoryScreen.route) {
                 popUpTo(Screen.LoginScreen.route) { inclusive = true }
             }
         } else if (authState.value is AuthState.Error) {

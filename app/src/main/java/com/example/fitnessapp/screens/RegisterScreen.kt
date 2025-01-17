@@ -51,7 +51,6 @@ import com.example.fitnessapp.ui.theme.FirstTextColor
 import com.example.fitnessapp.ui.theme.MainBGColor
 import com.example.fitnessapp.ui.theme.mainFontFamily
 import com.example.fitnessapp.utils.FitnessAppTextFieldForNumbers
-import com.example.fitnessapp.utils.FitnessAppTextFieldForPassword
 import com.example.fitnessapp.utils.FitnessAppTextFieldForText
 import com.example.fitnessapp.utils.GENDER_FEMALE
 import com.example.fitnessapp.utils.GENDER_MALE
@@ -220,7 +219,7 @@ fun RegisterHorizontalPager(
                         height = heightState.value.toInt(),
                         context = context
                     )
-                    navController.navigate(Screen.MainScreen.route)
+                    navController.navigate(Screen.CategoryScreen.route)
                 }
             },
             shape = RoundedCornerShape(8.dp),

@@ -5,7 +5,7 @@ import io.realm.kotlin.types.annotations.PrimaryKey
 import org.mongodb.kbson.ObjectId
 
 class Exercise: RealmObject {
-    @PrimaryKey var _id: ObjectId = ObjectId()
+    @PrimaryKey
     var name: String = ""
     var avatarPath = ""
     var exerciseDetails: ExerciseDetails? = null

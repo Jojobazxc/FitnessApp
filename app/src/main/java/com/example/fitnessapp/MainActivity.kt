@@ -15,8 +15,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Navigation(
-                authViewModel = authViewModel,
                 realmViewModel = realmViewModel,
+                authViewModel = authViewModel
             )
         }
     }

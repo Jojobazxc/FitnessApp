@@ -13,3 +13,6 @@ val Pink40 = Color(0xFF7D5260)
 val MainBGColor = Color(0xFFF7F8F9)
 val ButtonsColor = Color(0xFF6B5AF6)
 val FirstTextColor = Color(0xFF2F2F3B)
+
+val CardGradientStartColor = Color(0xFFD9C3FA)
+val CardGradientEndColor = Color(0xFFF0EBF7)
