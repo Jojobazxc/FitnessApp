@@ -12,7 +12,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnessapp.screens.LoginScreen
 import com.example.fitnessapp.screens.MainScreen
+import com.example.fitnessapp.screens.ProfileScreen
 import com.example.fitnessapp.screens.RegisterScreen
+import com.example.fitnessapp.screens.StartScreen
 import com.example.fitnessapp.utils.SharedPreferencesManager
 import com.example.fitnessapp.viewmodels.AuthViewModel
 import com.example.fitnessapp.viewmodels.RealmViewModel
@@ -20,12 +22,13 @@ import com.example.fitnessapp.viewmodels.RealmViewModel
 @Composable
 fun Navigation(realmViewModel: RealmViewModel, authViewModel: AuthViewModel) {
     val navController = rememberNavController()
-    var startDestination by remember { mutableStateOf(Screen.RegisterScreen.route) }
+    var startDestination by remember { mutableStateOf(Screen.StartScreen.route) }
     val context = LocalContext.current
 //    SharedPreferencesManager.init(context)
 //    SharedPreferencesManager.deleteObjectId()
 //    realmViewModel.deleteAllUsers()
-    // Асинхронная проверка авторизации
+
+
     LaunchedEffect(Unit) {
         val isLoggedIn = authViewModel.isUserLoggedIn(context)
         startDestination = if (isLoggedIn == true) Screen.MainScreen.route else Screen.RegisterScreen.route
@@ -44,12 +47,22 @@ fun Navigation(realmViewModel: RealmViewModel, authViewModel: AuthViewModel) {
         composable(
             route = Screen.MainScreen.route
         ) {
-            MainScreen()
+            MainScreen(/*realmViewModel = realmViewModel,*/ navController = navController)
         }
         composable(
             route = Screen.RegisterScreen.route
         ) {
             RegisterScreen(authViewModel = authViewModel, navController = navController)
+        }
+        composable(
+            route = Screen.StartScreen.route
+        ) {
+            StartScreen()
+        }
+        composable(
+            route = Screen.ProfileScreen.route
+        ) {
+            ProfileScreen(navController = navController)
         }
     }
 }

@@ -31,7 +31,7 @@ class RealmViewModel: ViewModel() {
     fun deleteAllUsers() {
 
         realm.writeBlocking {
-            delete(User::class) // Удаляем все объекты типа User
+            delete(User::class)
         }
 
     }
